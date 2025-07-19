@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>URL Shortener</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ece9e6, #a41322);
+    }
+
+    .container {
+      text-align: center;
+      background-color: blueviolet;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #ad0909;
+      font-style: italic;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #shortenedUrl {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    #shortenedUrl a {
+      color: #1a73e8;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    #shortenedUrl a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>URL Shortener</h1>
+    <input type="text" id="originalUrl" placeholder="Enter your URL...">
+    <button onclick="shortenUrl()">Shorten</button>
+    <p id="shortenedUrl"></p>
+  </div>
+
+  <script>
+    function shortenUrl() {
+      const originalUrl = document.getElementById('originalUrl').value.trim();
+      if (!originalUrl || !isValidUrl(originalUrl)) {
+        alert('Please enter a valid URL.');
+        return;
+      }
+
+      const hash = hashUrl(originalUrl);
+      const shortened = `https://short.ly/${hash}`;
+      
+      const output = document.getElementById('shortenedUrl');
+      output.innerHTML = `<strong>Shortened URL:</strong> <br><a href="${originalUrl}" target="_blank">${shortened}</a>`;
+    }
+
+    function hashUrl(url) {
+      let hash = 0;
+      for (let i = 0; i < url.length; i++) {
+        hash = ((hash << 5) - hash) + url.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash).toString(36).substring(0, 6);
+    }
+
+    function isValidUrl(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
