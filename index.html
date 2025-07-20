@@ -1,9 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>URL Shortener</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grechen+Fuemen&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,7 +32,9 @@
     h1 {
       margin-bottom: 20px;
       color: #ad0909;
-      font-style: italic;
+    font-family: "Grechen Fuemen", cursive;
+    font-style: italic;
+
     }
 
     input[type="text"] {
@@ -73,7 +79,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>URL Shortener</h1>
+    <h1>Url Shortener</h1>
     <input type="text" id="originalUrl" placeholder="Enter your URL...">
     <button onclick="shortenUrl()">Shorten</button>
     <p id="shortenedUrl"></p>
